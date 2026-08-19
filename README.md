@@ -6,6 +6,11 @@ uploads to Cloudinary. Built with Express 5 and MongoDB (Mongoose).
 
 Deployed at: `https://personal-zebbian-portfolio-api.onrender.com`
 
+Interactive API docs (Swagger UI): `/api-docs` — e.g.
+`https://personal-zebbian-portfolio-api.onrender.com/api-docs`. The raw
+OpenAPI spec is also served as JSON at `/api-docs.json`, importable into
+Postman/Insomnia.
+
 ## Tech stack
 
 - **Express 5**
@@ -33,6 +38,7 @@ All routes are prefixed with `/api/v1`.
 | POST   | `/upload`          | admin        | Upload an image (multipart `image` field), returns its Cloudinary URL |
 
 Protected routes require `Authorization: Bearer <token>` from `/auth/login`.
+Full request/response schemas are in `/api-docs` rather than duplicated here.
 
 ## Project structure
 
@@ -46,6 +52,7 @@ src/
   routes/              route definitions per resource
   middleware/           auth (JWT + admin check), validate (Zod), error handler
   schemas/             Zod schemas for request validation
+  docs/                openapi.js — the OpenAPI spec served at /api-docs
 scripts/
   seed-admin.js         one-off CLI script to create/reset the admin login
 ```
