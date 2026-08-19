@@ -20,7 +20,8 @@ export const createProject = async (req, res, next) => {
 
 export const updateProject = async (req, res, next) => {
   try {
-    const project = await Project.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const project = await Project.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+    if (!project) return res.status(404).json({ message: "Project not found" });
     res.json(project);
   } catch (err) {
     next(err);
@@ -29,7 +30,8 @@ export const updateProject = async (req, res, next) => {
 
 export const deleteProject = async (req, res, next) => {
   try {
-    await Project.findByIdAndDelete(req.params.id);
+    const project = await Project.findByIdAndDelete(req.params.id);
+    if (!project) return res.status(404).json({ message: "Project not found" });
     res.status(204).end();
   } catch (err) {
     next(err);

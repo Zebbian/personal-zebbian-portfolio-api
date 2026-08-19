@@ -33,6 +33,11 @@ app.use("/api/v1/projects", projectRoutes);
 app.use("/api/v1/vlogs", vlogRoutes);
 app.use("/api/v1/upload", uploadRoutes);
 
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({ success: false, message: "Route not found" });
+});
+
 // Error handler
 app.use(errorHandler);
 
